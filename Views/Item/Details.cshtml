@@ -1,0 +1,15 @@
+﻿@{ ViewData["Title"] = "Item Details Page"; }
+@model Item
+<div class="text-center">
+    @*<p>@Model.Id @Model.Name @Model.Price @Model.Quantity</p>*@
+    <form method="post" asp-controller="Item" asp-action="Update">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <label>Name:</label>
+        <input type="text" value="@Model.Name" name="name" required />
+        <label>Price:</label>
+        <input type="number" value="@Model.Price" name="price" required min="0" step=".01" />
+        <label>Quantity:</label>
+        <input type="number" value="@Model.Quantity" name="quantity" required min="0" step=".01" />
+        <input type="submit" value="Update Item" name="submit" />
+    </form>
+</div>

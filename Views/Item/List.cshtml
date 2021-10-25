@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Items List Page";
+}
+
+@model List<Item>
+
+<div class="text-center">
+    @foreach (var item in Model)
+    {
+    <p>
+        @item.Id - @item.Name - @item.Price € - @item.Quantity pcs. 
+        <a href="@Url.Action("Delete", "Item", new { ID = item.Id })">Delete</a>
+        <a href="@Url.Action("Details", "Item", new { ID = item.Id })">Update</a>
+    </p>
+    }
+    <hr />
+    <form method="post" asp-controller="Item" asp-action="Create">
+        <label>Name:</label>
+        <input type="text" name="name" required />
+        <label>Price:</label>
+        <input type="number" name="price" required min="0" step=".01" />
+        <label>Quantity:</label>
+        <input type="number" name="quantity" required min="0" step=".01" />
+        <input type="submit" value="Create Item" name="submit" />
+    </form>
+
+</div>
+
