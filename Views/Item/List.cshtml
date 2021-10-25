@@ -5,15 +5,6 @@
 @model List<Item>
 
 <div class="text-center">
-    @foreach (var item in Model)
-    {
-    <p>
-        @item.Id - @item.Name - @item.Price € - @item.Quantity pcs. 
-        <a href="@Url.Action("Delete", "Item", new { ID = item.Id })">Delete</a>
-        <a href="@Url.Action("Details", "Item", new { ID = item.Id })">Update</a>
-    </p>
-    }
-    <hr />
     <form method="post" asp-controller="Item" asp-action="Create">
         <label>Name:</label>
         <input type="text" name="name" required />
@@ -23,6 +14,33 @@
         <input type="number" name="quantity" required min="0" step=".01" />
         <input type="submit" value="Create Item" name="submit" />
     </form>
+    <hr />
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="col-2">Name</th>
+                <th scope="col" class="col-2">Price, €</th>
+                <th scope="col" class="col-2">Quantity, pcs.</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th> 
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("Details", "Item", new { ID = item.Id })" role="button">Update</a>
+                        <a class="btn btn-danger" href="@Url.Action("Delete", "Item", new { ID = item.Id })" role="button">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 </div>
 

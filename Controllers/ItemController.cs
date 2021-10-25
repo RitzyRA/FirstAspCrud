@@ -9,8 +9,8 @@ namespace MvcApp2.Controllers
 {
     public class ItemController : Controller
     {
-        private ItemRepository _itemRepository;
-        public ItemController(ItemRepository itemRepository)
+        private IItemRepository _itemRepository;
+        public ItemController(IItemRepository itemRepository)
         {
             _itemRepository = itemRepository;
         }

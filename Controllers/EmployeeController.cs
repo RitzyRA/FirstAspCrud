@@ -9,8 +9,8 @@ namespace MvcApp2.Controllers
 {
     public class EmployeeController : Controller
     {
-        private EmployeeRepository _employeeRepository;
-        public EmployeeController(EmployeeRepository employeeRepository)
+        private IEmployeeRepository _employeeRepository;
+        public EmployeeController(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
         }

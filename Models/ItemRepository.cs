@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MvcApp2.Models
 {
-    public class ItemRepository
+    public class ItemRepository : IItemRepository
     {
         private static List<Item> _items;
         public ItemRepository()
@@ -17,12 +17,12 @@ namespace MvcApp2.Models
             };
         }
 
-        public List<Item> GetAll()
+        public IEnumerable<Item> GetAll()
         {
             return _items;
         }
 
-        public bool DeleteById(int id)
+        public bool DeleteById(int? id)
         {
             var e = _items.First(e => e.Id == id);
             return _items.Remove(e);
