@@ -31,6 +31,9 @@ namespace MvcApp2
             services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
             //services.AddSingleton(new ItemRepository());
             services.AddSingleton<IItemRepository, ItemRepository>();
+            //services.AddSingleton(new EmployeeDepartmentRepository(new EmployeeRepository(), new DepartmentRepository()));
+            services.AddSingleton<IDepartmentRepository, DepartmentRepository>();
+            services.AddSingleton<IEmployeeDepartmentRepository, EmployeeDepartmentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

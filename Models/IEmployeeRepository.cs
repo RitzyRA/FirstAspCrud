@@ -9,8 +9,8 @@ namespace MvcApp2.Models
     {
         IEnumerable<Employee> GetAll();
         bool DeleteById(int? id);
-        void Create(string name);
+        void Create(string name, int? depId);
         Employee GetById(int id);
-        void Update(int updateableId, string updatedName);
+        void Update(int updateableId, string updatedName, int? updatedDepId);
     }
 }

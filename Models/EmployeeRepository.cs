@@ -11,9 +11,9 @@ namespace MvcApp2.Models
         public EmployeeRepository()
         {
             _employees = new List<Employee>(){
-                new Employee() { Id = 1, Name = "Mindaugas"},
-                new Employee() { Id = 2, Name = "Jonas"},
-                new Employee() { Id = 3, Name = "Petras"}
+                new Employee() { Id = 1, Name = "Jonas", DepId = 1},
+                new Employee() { Id = 2, Name = "Antanas", DepId = 3},
+                new Employee() { Id = 3, Name = "Petras", DepId = 2}
             };
         }
 
@@ -27,18 +27,25 @@ namespace MvcApp2.Models
             var e = _employees.First(e => e.Id == id);
             return _employees.Remove(e);
         }
-        public void Create(string name)
+        public void Create(string name, int? depId)
         {
-            _employees.Add(new Employee() { Id = _employees.Count + 1, Name = name });
+            var max = int.MinValue;
+            foreach (var item in _employees)
+            {
+                if (item.Id > max)
+                    max = item.Id;
+            }
+            _employees.Add(new Employee() { Id = max + 1, Name = name, DepId = (int)depId });
         }
         public Employee GetById(int id)
         {
             return _employees.First(e => e.Id == id);
         }
-        public void Update(int updateableId, string updatedName)
+        public void Update(int updateableId, string updatedName, int? updatedDepId)
         {
             var e = _employees.First(e => e.Id == updateableId);
             e.Name = updatedName;
+            e.DepId = (int)updatedDepId;
         }
     }
 }

@@ -9,10 +9,10 @@ namespace MvcApp2.Controllers
 {
     public class EmployeeController : Controller
     {
-        private IEmployeeRepository _employeeRepository;
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        private IEmployeeDepartmentRepository _employeeDepRepository;
+        public EmployeeController(IEmployeeDepartmentRepository employeeDepRepository)
         {
-            _employeeRepository = employeeRepository;
+            _employeeDepRepository = employeeDepRepository;
         }
 
         public IActionResult Index()
@@ -21,33 +21,33 @@ namespace MvcApp2.Controllers
         }
         public IActionResult List()
         {
-            return View(_employeeRepository.GetAll());
+            return View(_employeeDepRepository.GetAll());
         }
 
         public IActionResult Delete(int? id)
         {
             if (id is null) return NotFound();
-            if (_employeeRepository.DeleteById((int)id))
+            if (_employeeDepRepository.DeleteById((int)id))
             {
                 //return Ok(); //200
                 return RedirectToAction("List");
             }
             else return NotFound(); //404
         }
-        public IActionResult Create(string name)
+        public IActionResult Create(string name, string depName)
         {
-            _employeeRepository.Create(name);
+            _employeeDepRepository.Create(name, depName);
             return RedirectToAction("List");
         }
         public IActionResult Details(int? id)
         {
             return id == null
                 ? NotFound()
-                : View(_employeeRepository.GetById((int)id));
+                : View(_employeeDepRepository.GetById((int)id));
         }
-        public IActionResult Update(int id, string name)
+        public IActionResult Update(int id, string name, string depName)
         {
-            _employeeRepository.Update(id, name);
+            _employeeDepRepository.Update(id, name, depName);
             return RedirectToAction("Details", new { id = id });
         }
 

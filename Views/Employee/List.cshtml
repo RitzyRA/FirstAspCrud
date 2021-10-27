@@ -2,25 +2,46 @@
     ViewData["Title"] = "Employees List Page";
 }
 
-@model List<Employee>
+@model List<EmployeeDepartmentViewModel>
 
-<div class="text-center">
-    @foreach (var item in Model)
-    {
-        //href="/Employee/Delete/ID";
-        <p><h1 class="display-4" style="color: red">
-    @item.Id - @item.Name
-    <a href="@Url.Action("Delete", "Employee", new { ID = item.Id })">Delete</a>
-    <a href="@Url.Action("Details", "Employee", new { ID = item.Id })">Update</a>
-
-</h1></p>
-    }
-    <hr />
-    <form method="post" asp-controller="Employee" asp-action="Create">
-        <label>Name:</label>
-        <input type="text" name="name" />
-        <input type="submit" value="Create Employee" name="submit" />
-    </form>
-
+<div class="text-center position-sticky sticky-top">
+    <table class="table table-striped align-middle">
+        <thead class="position-sticky sticky-top bg-white">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <th scope="row">@employee.Id</th>
+                    <td>@employee.Name</td>
+                    <td>@employee.DepName</td>
+                    <td>
+                        <a class="btn btn-primary" href="@Url.Action("Details", "Employee", new { ID = employee.Id })" role="button">Update</a>
+                        <a class="btn btn-danger" href="@Url.Action("Delete", "Employee", new { ID = employee.Id })" role="button">Delete</a>
+                    </td>
+                </tr>
+            }
+            <form method="post" asp-controller="Employee" asp-action="Create">
+                <tr>
+                    <th scope="row"> </th>
+                    <td>
+                            <input class="form-control" type="text" name="name" placeholder="Name" required />
+                    </td>
+                    <td>
+                            <input class="form-control" type="text" name="depName" placeholder="Department" />
+                    </td>
+                    <td>
+                            <input class="btn btn-primary" type="submit" value="Create Employee" name="submit" />
+                    </td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
 </div>
 

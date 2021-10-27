@@ -1,11 +1,13 @@
 ﻿@{ ViewData["Title"] = "Employee Details Page"; }
-@model Employee
+@model EmployeeDepartmentViewModel
 <div class="text-center">
     @*<p>@Model.Id @Model.Name</p>*@
     <form method="post" asp-controller="Employee" asp-action="Update">
         <input type="hidden" name="id" value="@Model.Id" />
         <label>Name:</label>
         <input type="text" value="@Model.Name" name="name" />
+        <label>Department:</label>
+        <input type="text" value="@Model.DepName" name="depName" />
         <input type="submit" value="Update Employee" name="submit" />
     </form>
 </div>
